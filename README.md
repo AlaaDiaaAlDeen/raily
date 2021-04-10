@@ -1,2 +1,2 @@
 # Raily
-An online reservation system for rail transport
+An online reservation system for train transport
