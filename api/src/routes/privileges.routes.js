@@ -5,6 +5,6 @@ const PrivilegesModel = require('../models/privileges.model.js')
 
 const router = new express.Router()
 
-
+ 
 
 module.exports = router
