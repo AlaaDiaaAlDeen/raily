@@ -7,8 +7,8 @@ const router = new express.Router()
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: '',
-      pass: ''
+      user: 'alaa.kanii@gmail.com',
+      pass: 'kanii_33'
     }
   });
   
@@ -23,7 +23,7 @@ router.post('/user/register', async (req,res)=>{
 
         
         var mailOptions = {
-            from: '',
+            from: 'Raily',
             to: user.email,
             subject: 'activation mail',
            text: `please follow the following link to activate your account :\n http://localhost:3000/user/activate/${user._id}`

@@ -1,5 +1,6 @@
 const express = require('express')
 
+const auth = require('../middleware/auth')
 const RolesModel = require('../models/user-roles.model.js')
 const PrivilegesModel = require('../models/privileges.model.js')
 
@@ -21,16 +22,16 @@ const failed = function(error, msg){
     }
 }
 
-router.get('/rolestypes/showall', async (req,res)=>{
+router.get('/roles/showall', async (req,res)=>{
     try{
-        data = await RolesModel().find()
+        data = await RolesModel.find()
         res.status(200).send(success(data,'Data retrieved'))
     }catch(e){
         res.status(500).send(failed(e,'Failed to load data'))
     }
 })
 
-router.post('/rolestypes/add', async (req,res)=>{
+router.post('/roles/add', async (req,res)=>{
     try{
         data = new RolesModel(req.body)
         await data.save()
@@ -40,7 +41,16 @@ router.post('/rolestypes/add', async (req,res)=>{
     }
 })
 
-router.post('/addroute', auth, async(req,res)=>{
+router.get('/routes/showall', async (req,res)=>{
+    try{
+        data = await PrivilegesModel.find()
+        res.status(200).send(success(data,'Data retrieved'))
+    }catch(e){
+        res.status(500).send(failed(e,'Failed to load data'))
+    }
+})
+
+router.post('/routes/add', auth, async(req,res)=>{
     try{
         data = new PrivilegesModel({
             routeLink:req.body.routeLink,
@@ -63,10 +73,6 @@ router.post('/giveaccess', auth, async(req,res)=>{
         res.status(500).send(failed(e,'Failed to add access'))
     }
 })
-try{
-    res.status(200).send(success(data,''))
-}catch(e){
-    res.status(500).send(failed(e,''))
-}
+
 
 module.exports = router

@@ -10,6 +10,6 @@ const privilegesSchema = mongoose.Schema({
     }]
 })
 
-const PrivilegesModel = mongoose.Model('Privileges', privilegesSchema)
+const PrivilegesModel = mongoose.model('Privileges', privilegesSchema)
 
 module.exports = PrivilegesModel
