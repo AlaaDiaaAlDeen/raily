@@ -6,9 +6,11 @@ const auth = async(req, res, next)=>{
     try{
         const token = req.header('Authorization').replace('Bearer ', '')
         const decoded = jwt.verify(token, process.env.JWTSECRET)
+        console.log(decoded._id)
+        console.log(token)
         const user = await User.findOne({
             '_id': decoded._id,
-            'token': token,
+            'tokens.token': token,
             'status': true
         })
         if(!user) throw new Error('Failed to log in')
@@ -17,13 +19,15 @@ const auth = async(req, res, next)=>{
         req.token = token
 
         const data = await PrivilegesModel.findOne({'routeLink':req.originalUrl})
-        if(data.privilegedRoles.includes(user.role))
-            next()
-        else throw new Error('Unauthoraized access')
+        if(data){
+            if(data.privilegedRoles.includes(user.role))
+                next()
+            else throw new Error('Unauthoraized access')
+        }else throw new Error('No such route')
     }catch(e){
         res.status(500).send({
             "apiStatus": false,
-            "error": error.message,
+            "error": e.message,
             "message": 'Authorization failed'
         })
     }

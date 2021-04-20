@@ -63,9 +63,9 @@ router.post('/routes/add', auth, async(req,res)=>{
     }
 })
 
-router.post('/giveaccess', auth, async(req,res)=>{
+router.post('/routes/giveaccess', auth, async(req,res)=>{
     try{
-        data = await PrivilegesModel.findOne({'routeLink':req.body.route})
+        data = await PrivilegesModel.findOne({'routeLink':req.body.routeLink})
         data.privilegedRoles.push(req.body.role)
         await data.save()
         res.status(200).send(success(data,'Access added'))

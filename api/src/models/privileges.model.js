@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const privilegesSchema = mongoose.Schema({
     routeLink:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     privilegedRoles:[{
         type:String
