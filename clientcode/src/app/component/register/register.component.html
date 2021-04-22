@@ -1,0 +1,11 @@
+
+<form class="box border-5 rounded" action="#" method="post" (submit)="onRegister()" #signupForm ='ngForm'>
+  <h1>SIGN UP</h1>
+  <input type="text" class="form-control" placeholder='name'[(ngModel)]="name" name="name">
+  <input type="email"  placeholder="Email Address" class="form-control" [(ngModel)]="email" name="email" >
+  <input type="text" name="phone" [(ngModel)]="phone" class="form-control"  placeholder="phone">
+  <input type="password" class="form-control" [(ngModel)]="password" name="password" placeholder="Password" >
+  <input type="text" class="form-control" [(ngModel)]="userName" name="userName" placeholder="username" >
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+  
